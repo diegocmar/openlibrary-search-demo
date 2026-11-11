@@ -9,7 +9,7 @@
     <string name="book_unknown_author">Unknown author</string>
     <string name="book_first_published">First published in %1$d</string>
     <string name="book_editions">%1$d editions</string>
-    <string name="detail_back">Back</string>
+    <string name="navigate_back">Back</string>
     <string name="detail_first_publish_date">First publish date</string>
     <string name="detail_description">Description</string>
     <string name="detail_subjects">Subjects</string>
@@ -19,4 +19,5 @@
     <string name="error_server">The server returned an error (%1$d).</string>
     <string name="error_unknown">Something went wrong.</string>
     <string name="retry">Retry</string>
+    <string name="about_title">About this app</string>
 </resources>

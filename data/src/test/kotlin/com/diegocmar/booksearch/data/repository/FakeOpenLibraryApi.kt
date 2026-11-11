@@ -5,7 +5,7 @@ import com.diegocmar.booksearch.data.remote.dto.SearchDocDto
 import com.diegocmar.booksearch.data.remote.dto.SearchResponseDto
 import com.diegocmar.booksearch.data.remote.dto.WorkDto
 
-/** Hand-written fake: records calls and lets each test decide what the "network" answers. */
+/** Records calls and lets each test decide what the network answers. */
 class FakeOpenLibraryApi : OpenLibraryApi {
     val searchCalls = mutableListOf<String>()
     var searchAnswer: suspend (query: String) -> SearchResponseDto = { query -> responseFor(query) }

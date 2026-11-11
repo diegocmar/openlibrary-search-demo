@@ -26,11 +26,9 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 
 /**
- * Search screen ViewModel.
- *
- * Cancellation: every search request goes through [flatMapLatest]. When a new request arrives, the
- * coroutine of the previous one is cancelled — both while it is waiting for the debounce and while
- * the HTTP call is in flight (Retrofit cancels the OkHttp call). A cancelled search never emits, so
+ * Every search request goes through [flatMapLatest]. When a new request arrives, the coroutine of
+ * the previous one is cancelled, both while it is waiting for the debounce and while the HTTP call
+ * is in flight (Retrofit cancels the OkHttp call). A cancelled search never emits, so
  * results of an older query can never overwrite the newer one.
  */
 @OptIn(ExperimentalCoroutinesApi::class)

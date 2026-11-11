@@ -34,10 +34,8 @@ import com.diegocmar.booksearch.domain.model.BookDetail
 import com.diegocmar.booksearch.ui.common.CoverImage
 import com.diegocmar.booksearch.ui.common.ErrorContent
 import com.diegocmar.booksearch.ui.common.LoadingContent
+import com.diegocmar.booksearch.ui.common.MarkdownText
 import com.diegocmar.booksearch.ui.theme.BookSearchTheme
-import com.mikepenz.markdown.coil3.Coil3ImageTransformerImpl
-import com.mikepenz.markdown.m3.Markdown
-import com.mikepenz.markdown.m3.markdownTypography
 
 @Composable
 fun DetailRoute(
@@ -62,7 +60,7 @@ fun DetailScreen(title: String, uiState: DetailUiState, onBack: () -> Unit, onRe
                     IconButton(onClick = onBack) {
                         Icon(
                             Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(R.string.detail_back)
+                            contentDescription = stringResource(R.string.navigate_back)
                         )
                     }
                 }
@@ -135,15 +133,6 @@ private fun DetailField(label: String, content: @Composable () -> Unit) {
         )
         content()
     }
-}
-
-@Composable
-private fun MarkdownText(markdown: String) {
-    Markdown(
-        content = markdown,
-        typography = markdownTypography(paragraph = MaterialTheme.typography.bodyMedium),
-        imageTransformer = Coil3ImageTransformerImpl
-    )
 }
 
 @Preview(showBackground = true)

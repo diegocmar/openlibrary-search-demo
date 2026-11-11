@@ -17,6 +17,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -49,9 +50,18 @@ import com.diegocmar.booksearch.ui.common.MessageContent
 import com.diegocmar.booksearch.ui.theme.BookSearchTheme
 
 @Composable
-fun SearchRoute(onBookClick: (Book) -> Unit, viewModel: SearchViewModel = hiltViewModel()) {
+fun SearchRoute(
+    onBookClick: (Book) -> Unit,
+    onInfoClick: () -> Unit,
+    viewModel: SearchViewModel = hiltViewModel()
+) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    SearchScreen(uiState = uiState, onAction = viewModel::onAction, onBookClick = onBookClick)
+    SearchScreen(
+        uiState = uiState,
+        onAction = viewModel::onAction,
+        onBookClick = onBookClick,
+        onInfoClick = onInfoClick
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,10 +69,23 @@ fun SearchRoute(onBookClick: (Book) -> Unit, viewModel: SearchViewModel = hiltVi
 fun SearchScreen(
     uiState: SearchUiState,
     onAction: (SearchAction) -> Unit,
-    onBookClick: (Book) -> Unit
+    onBookClick: (Book) -> Unit,
+    onInfoClick: () -> Unit
 ) {
     Scaffold(
-        topBar = { TopAppBar(title = { Text(stringResource(R.string.search_title)) }) }
+        topBar = {
+            TopAppBar(
+                title = { Text(stringResource(R.string.search_title)) },
+                actions = {
+                    IconButton(onClick = onInfoClick) {
+                        Icon(
+                            Icons.Outlined.Info,
+                            contentDescription = stringResource(R.string.about_title)
+                        )
+                    }
+                }
+            )
+        }
     ) { padding ->
         Column(modifier = Modifier.fillMaxSize().padding(padding)) {
             SearchField(
@@ -192,7 +215,8 @@ private fun SearchScreenPreview() {
                         )
                 ),
             onAction = {},
-            onBookClick = {}
+            onBookClick = {},
+            onInfoClick = {}
         )
     }
 }

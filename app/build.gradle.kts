@@ -47,6 +47,35 @@ android {
     }
 }
 
+abstract class CopyReadmeTask : DefaultTask() {
+    @get:InputFile
+    @get:PathSensitive(PathSensitivity.NONE)
+    abstract val readme: RegularFileProperty
+
+    @get:OutputDirectory
+    abstract val outputDir: DirectoryProperty
+
+    @TaskAction
+    fun copy() {
+        readme.get().asFile.copyTo(outputDir.file("README.md").get().asFile, overwrite = true)
+    }
+}
+
+// The project README is bundled as an asset and shown in the "About" screen.
+androidComponents {
+    onVariants { variant ->
+        val copyReadme =
+            tasks.register<CopyReadmeTask>(
+                "copy${variant.name.replaceFirstChar {
+                    it.uppercase()
+                }}Readme"
+            ) {
+                readme.set(rootProject.layout.projectDirectory.file("README.md"))
+            }
+        variant.sources.assets?.addGeneratedSourceDirectory(copyReadme, CopyReadmeTask::outputDir)
+    }
+}
+
 dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))

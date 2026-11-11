@@ -5,9 +5,6 @@ import com.diegocmar.booksearch.domain.model.BookError
 import com.diegocmar.booksearch.domain.repository.BookRepository
 import javax.inject.Inject
 
-/**
- * Gets the detail of a book.
- */
 class GetBookDetailUseCase
 @Inject
 constructor(private val repository: BookRepository) {
