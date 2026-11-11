@@ -67,6 +67,8 @@ dependencies {
 
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+    implementation(libs.markdown.renderer.m3)
+    implementation(libs.markdown.renderer.coil3)
 
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.lifecycle.viewmodel.compose)

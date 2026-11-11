@@ -17,7 +17,7 @@ Gratuita y sin API key ([docs](https://openlibrary.org/developers/api)).
 | Portadas | `https://covers.openlibrary.org/b/id/{coverId}-{S\|M\|L}.jpg` |
 
 - **Listado**: portada, título, autores y año de primera publicación.
-- **Detalle**: portada, título, fecha de primera publicación, temas (*subjects*) y descripción.
+- **Detalle**: portada, título, fecha de primera publicación, temas (*subjects*) y descripción (en Markdown, renderizada con enlaces y formato mediante [multiplatform-markdown-renderer](https://github.com/mikepenz/multiplatform-markdown-renderer)).
 
 ## Cómo ejecutar
 
@@ -120,7 +120,7 @@ JUnit 5, `kotlin.test`, `kotlinx-coroutines-test` y MockK.
 | domain | `SearchBooksUseCaseTest`, `GetBookDetailUseCaseTest` | Repositorio mockeado con MockK: delegación, trim, query/id vacíos sin tocar el repositorio, propagación de errores |
 | data | `BookRepositoryImplTest` | Acierto de cache sin red, normalización de la clave, queries independientes, expiración y refresco, errores no cacheados, mapeo de errores HTTP, propagación de la cancelación |
 | data | `InMemoryCacheTest` | Límite exacto del TTL, sobrescritura, `clear` |
-| data | `BookMappersTest` | DTO → dominio, descripción como texto u objeto, portadas inválidas (`-1`) |
+| data | `BookMappersTest` | DTO → dominio, descripción como texto u objeto, normalización de saltos de línea, portadas inválidas (`-1`) |
 | app | `SearchViewModelTest` | Debounce, **cancelación de la búsqueda en vuelo**, limpiar el campo, vacío, error y reintento |
 | app | `DetailViewModelTest` | Carga, error y reintento |
 

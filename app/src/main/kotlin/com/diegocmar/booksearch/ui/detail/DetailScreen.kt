@@ -36,6 +36,9 @@ import com.diegocmar.booksearch.domain.model.BookDetail
 import com.diegocmar.booksearch.ui.common.ErrorContent
 import com.diegocmar.booksearch.ui.common.LoadingContent
 import com.diegocmar.booksearch.ui.theme.BookSearchTheme
+import com.mikepenz.markdown.coil3.Coil3ImageTransformerImpl
+import com.mikepenz.markdown.m3.Markdown
+import com.mikepenz.markdown.m3.markdownTypography
 
 @Composable
 fun DetailRoute(
@@ -113,20 +116,37 @@ private fun BookDetailContent(book: BookDetail, modifier: Modifier = Modifier) {
                 notAvailable
             }
         )
-        DetailField(stringResource(R.string.detail_description), book.description ?: notAvailable)
+        DetailField(stringResource(R.string.detail_description)) {
+            book.description?.let { MarkdownText(it) }
+                ?: Text(notAvailable, style = MaterialTheme.typography.bodyMedium)
+        }
     }
 }
 
 @Composable
 private fun DetailField(label: String, value: String) {
+    DetailField(label) { Text(value, style = MaterialTheme.typography.bodyMedium) }
+}
+
+@Composable
+private fun DetailField(label: String, content: @Composable () -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text(
             label,
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.primary
         )
-        Text(value, style = MaterialTheme.typography.bodyMedium)
+        content()
     }
+}
+
+@Composable
+private fun MarkdownText(markdown: String) {
+    Markdown(
+        content = markdown,
+        typography = markdownTypography(paragraph = MaterialTheme.typography.bodyMedium),
+        imageTransformer = Coil3ImageTransformerImpl
+    )
 }
 
 @Preview(showBackground = true)
@@ -140,7 +160,9 @@ private fun DetailScreenPreview() {
                     BookDetail(
                         id = "OL893414W",
                         title = "Dune",
-                        description = "Set on the desert planet Arrakis...",
+                        description =
+                            "Set on the desert planet **Arrakis**.\n\n" +
+                                "- [Dune Messiah](https://openlibrary.org/works/OL893526W)",
                         firstPublishDate = "1965",
                         subjects = listOf("Science fiction", "Dune (Imaginary place)"),
                         coverUrl = null

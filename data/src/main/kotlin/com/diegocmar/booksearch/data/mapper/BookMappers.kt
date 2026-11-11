@@ -41,4 +41,4 @@ private fun kotlinx.serialization.json.JsonElement?.toDescriptionText(): String?
     is JsonPrimitive -> contentOrNull
     is JsonObject -> this["value"]?.jsonPrimitive?.contentOrNull
     else -> null
-}?.takeIf { it.isNotBlank() }
+}?.replace("\r\n", "\n")?.takeIf { it.isNotBlank() }

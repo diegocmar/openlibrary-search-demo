@@ -57,6 +57,17 @@ class BookMappersTest {
     }
 
     @Test
+    fun `work description line endings are normalized`() {
+        val detail =
+            WorkDto(
+                key = "/works/OL1W",
+                description = JsonPrimitive("**Contains**\r\n\r\n- [A](https://a.b)")
+            ).toDomain()
+
+        assertEquals("**Contains**\n\n- [A](https://a.b)", detail.description)
+    }
+
+    @Test
     fun `invalid cover ids are skipped`() {
         val detail = WorkDto(key = "/works/OL1W", covers = listOf(-1, 42)).toDomain()
 
