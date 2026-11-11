@@ -23,16 +23,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil3.compose.AsyncImage
 import com.diegocmar.booksearch.R
 import com.diegocmar.booksearch.domain.model.BookDetail
+import com.diegocmar.booksearch.ui.common.CoverImage
 import com.diegocmar.booksearch.ui.common.ErrorContent
 import com.diegocmar.booksearch.ui.common.LoadingContent
 import com.diegocmar.booksearch.ui.theme.BookSearchTheme
@@ -93,10 +92,8 @@ private fun BookDetailContent(book: BookDetail, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         book.coverUrl?.let {
-            AsyncImage(
-                model = it,
-                contentDescription = null,
-                contentScale = ContentScale.Fit,
+            CoverImage(
+                url = it,
                 modifier =
                     Modifier
                         .fillMaxWidth()

@@ -40,9 +40,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil3.compose.AsyncImage
 import com.diegocmar.booksearch.R
 import com.diegocmar.booksearch.domain.model.Book
+import com.diegocmar.booksearch.ui.common.CoverImage
 import com.diegocmar.booksearch.ui.common.ErrorContent
 import com.diegocmar.booksearch.ui.common.LoadingContent
 import com.diegocmar.booksearch.ui.common.MessageContent
@@ -136,10 +136,10 @@ private fun BookRow(book: Book, onClick: () -> Unit) {
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        AsyncImage(
-            model = book.coverUrl,
-            contentDescription = null,
+        CoverImage(
+            url = book.coverUrl,
             contentScale = ContentScale.Crop,
+            loaderSize = 20.dp,
             modifier = Modifier.size(width = 48.dp, height = 72.dp).clip(RoundedCornerShape(4.dp))
         )
         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
