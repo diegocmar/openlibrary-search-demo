@@ -21,7 +21,7 @@ interface OpenLibraryApi {
     ): SearchResponseDto
 
     @GET("works/{id}.json")
-    suspend fun getWork(@Path("id") id: String): WorkDto
+    suspend fun getDetail(@Path("id") id: String): WorkDto
 
     companion object {
         const val BASE_URL = "https://openlibrary.org/"

@@ -30,7 +30,7 @@ constructor(
     }
 
     override suspend fun getBookDetail(id: String): Result<BookDetail> = safeApiCall {
-        api.getWork(id).toDomain()
+        api.getDetail(id).toDomain()
     }
 
     /** "  Dune " and "dune" share the same cache entry. */

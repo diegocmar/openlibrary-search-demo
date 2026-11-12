@@ -18,7 +18,7 @@ class FakeOpenLibraryApi : OpenLibraryApi {
         return searchAnswer(query)
     }
 
-    override suspend fun getWork(id: String): WorkDto = workAnswer(id)
+    override suspend fun getDetail(id: String): WorkDto = workAnswer(id)
 
     companion object {
         fun responseFor(query: String, version: Int = 1) = SearchResponseDto(
